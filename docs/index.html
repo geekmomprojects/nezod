@@ -5,7 +5,26 @@
     <link rel="stylesheet" href="https://geekmomprojects.github.io/nezod/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nezod Pet Gravity Simulator</title>
-    
+    <script>
+      var earthBox = document.getElementById('earth_val');
+      var nezodBox = document.getElementById('nezod_val');
+      var telemoBox = document.getElementById('telemo_val');
+      
+      earthBox.onkeyup = function(){
+          nezodBox.value = earthBox.value;
+          telemoBox.value = earthBox.value;
+      }
+      
+      nezodBox.onkeyup = function(){
+        earthBox.value = nezodBox.value;
+        telemoBox.value = nezodBox.value;
+      }
+      
+      telemoBox.onkeyup = function(){
+        earthBox.value = telemoBox.value;
+        nezodBox.value = telemoBox.value;
+      }
+    </script>
   </head>
   <body>
     <br><br>
