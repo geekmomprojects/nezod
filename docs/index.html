@@ -6,23 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nezod Pet Gravity Simulator</title>
     <script>
+      const nezod_to_earth = 1.3
+      const nezod_to_telemo = 0.8
       var earthBox = document.getElementById('earth_val');
       var nezodBox = document.getElementById('nezod_val');
       var telemoBox = document.getElementById('telemo_val');
       
       earthBox.onkeyup = function(){
-          nezodBox.value = earthBox.value;
-          telemoBox.value = earthBox.value;
+          nezodBox.value = earthBox.value/nezod_to_earth;
+          telemoBox.value = nezodBox.value*nezod_to_telemo;
       }
       
       nezodBox.onkeyup = function(){
-        earthBox.value = nezodBox.value;
-        telemoBox.value = nezodBox.value;
+        earthBox.value = nezodBox.value*nezod_to_earth;
+        telemoBox.value = nezodBox.value*nezod_to_telemo;
       }
       
       telemoBox.onkeyup = function(){
-        earthBox.value = telemoBox.value;
-        nezodBox.value = telemoBox.value;
+        earthBox.value = (telemoBox.value/nezod_to_telemo)*nezod_to_earth;
+        nezodBox.value = telemoBox.value/nezod_to_telemo
       }
     </script>
   </head>
