@@ -2,7 +2,37 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://geekmomprojects.github.io/nezod/style.css">
+    <style>
+	.h3,.h1 {text-align: center}
+	label {display: inline-block;
+			width: 130px;
+			text-align: right;
+			color: 	white;
+			font-size:	30px}
+			
+	input[type="number"] {
+			text-align:	left;
+			font-size:	20px;
+			width:		100px;
+			}
+
+		
+	
+	.inline-block-child {
+	  display: inline-flex;
+	  justify-content: center;
+	  margin: auto;
+	  height: 500 px
+	}
+	
+	.parent {
+		width: 800px;
+		margin: 0 auto;
+		text-align:	center;
+	}
+	
+
+	</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nezod Pet Gravity Simulator</title>
     <script>
@@ -12,33 +42,61 @@
       var nezodBox = document.getElementById('nezod_val');
       var telemoBox = document.getElementById('telemo_val');
       
-      earthBox.onkeyup = function(){
-          nezodBox.value = earthBox.value/nezod_to_earth;
-          telemoBox.value = nezodBox.value*nezod_to_telemo;
+      earthBoxHandler = function(){
+      var earthBox = document.getElementById('earth_val');
+      var nezodBox = document.getElementById('nezod_val');
+      var telemoBox = document.getElementById('telemo_val');
+		  earthVal = Number(earthBox.value)
+          nezodBox.value = (earthVal/nezod_to_earth).toFixed(1);
+          telemoBox.value = ((earthVal/nezod_to_earth)*nezod_to_telemo).toFixed(1);
       }
       
-      nezodBox.onkeyup = function(){
-        earthBox.value = nezodBox.value*nezod_to_earth;
-        telemoBox.value = nezodBox.value*nezod_to_telemo;
+      nezodBoxHandler = function(){
+		  var earthBox = document.getElementById('earth_val');
+		  var nezodBox = document.getElementById('nezod_val');
+		  var telemoBox = document.getElementById('telemo_val');
+		  var nezVal = Number(nezodBox.value)
+        earthBox.value = (nezVal*nezod_to_earth).toFixed(1);
+        telemoBox.value = (nezVal*nezod_to_telemo).toFixed(1);
       }
       
-      telemoBox.onkeyup = function(){
-        earthBox.value = (telemoBox.value/nezod_to_telemo)*nezod_to_earth;
-        nezodBox.value = telemoBox.value/nezod_to_telemo
+      telemoBoxHandler = function(){
+      var earthBox = document.getElementById('earth_val');
+      var nezodBox = document.getElementById('nezod_val');
+      var telemoBox = document.getElementById('telemo_val');
+	  var telVal = telemoBox.value
+        earthBox.value = ((telVal/nezod_to_telemo)*nezod_to_earth).toFixed(1);
+        nezodBox.value = (telVal/nezod_to_telemo).toFixed(1)
       }
     </script>
   </head>
-  <body>
+  <body style="background-color:black; color:white">
     <br><br>
-    Earth<br>
-    <input type='number' step ="0.1" name='earth' id='earth_val'>
-    <br><br>
-    Nezod<br>
-    <input type='number' step ="0.1" name='nezod' id='nezod_val'>
-    <br><br>
-    Telemo<br>
-    <input type='number' step ="0.1" name='telemo' id='telemo_val'>
-    <br><br>
-    <script src="https://geekmomprojects.github.io/nezod/script.js"></script>
+   
+	<div class='parent'>
+		<h1>GRAVITATION GENERATOR</h1><br><br>
+<h2>Enter a weight on Nezod, Earth, or Telemo to see<br>how their different gravitational forces change your weight on each one</h2>
+		
+		<div class='child inline-block-child'><form>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="nezod.png" width=180><br>
+			<label for="nezod">Nezod</label>
+			<input type='number' step ="0.1" name='nezod' id='nezod_val' onchange = "nezodBoxHandler()" onkeyup="nezodBoxHandler()" onpaste="nezodBoxHandler()">&nbsp;&nbsp;
+		</form></div>
+		
+		<div class='child inline-block-child'><form>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="earth.png" width=200><br>
+			<label for="earth">Earth</label>
+			<input type='number' step ="0.1" name='earth' id='earth_val' onchange = "earthBoxHandler()" onkeyup="earthBoxHandler()" onpaste="earthBoxHandler()">&nbsp;&nbsp;
+			
+		</form></div>
+		
+		<div class='child inline-block-child'><form>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="telemo.png" width=200><br>
+			<label for="telemo">Telemo</label>
+			<input type='number' step ="0.1" name='telemo' id='telemo_val' onchange = "telemoBoxHandler()" onkeyup="telemoBoxHandler()" onpaste="telemoBoxHandler()">&nbsp;&nbsp;
+			
+		</form></div>
+	</div>
+
   </body>
 </html>
